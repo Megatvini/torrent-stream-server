@@ -17,7 +17,18 @@ function createApp(config: Config, logger: Logger): Express {
     const app = express()
     app.use(cors())
     app.use(express.json())
+    
+    const basicAuth = require('express-basic-auth')
 
+    let ba = {
+        users: { ["hannibal"]:  process.env.HTTP_BASIC_PASSWORD},
+        challenge: true,
+        realm: 'rakaia.ge',
+    }
+
+    app.use(basicAuth(ba))
+
+    
     if (config.trustProxy) {
         logger.info('Enabling proxy support')
         app.set('trust proxy', true)
