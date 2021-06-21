@@ -28,7 +28,6 @@ function createApp(config: Config, logger: Logger): Express {
 
     app.use(basicAuth(ba))
 
-    
     if (config.trustProxy) {
         logger.info('Enabling proxy support')
         app.set('trust proxy', true)
